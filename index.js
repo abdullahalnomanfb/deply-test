@@ -24,7 +24,7 @@ app.use('/api/auth',AuthRoutes);
 
 
 // Error Handler 
-app.all('*',(req,res,next)=>{
+app.get('/',(req,res,next)=>{
   // next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
   res.send('HELLO USER')
 })
