@@ -6,14 +6,13 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldsDB = (err) => {
-  console.log(err.errors);
   const message = `Duplicate field value: please use use another value !`;
   return new AppError(message, 400);
 };
 
 const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors.errors).map((el) => el.message);
-  const message = `Invalid input data. ${errors.join(".")}`;
+  const message = `${errors.join(".")}`;
   return new AppError(message, 400);
 };
 
@@ -56,7 +55,6 @@ export default (err, req, res, next) => {
   }
   if (process.env.NODE_ENV === "production") {
     let error = { ...err };
-    console.log(error);
     if (error.name === "CastError") error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
     if (error.name === "ValidationError")  error = handleValidationErrorDB(error);

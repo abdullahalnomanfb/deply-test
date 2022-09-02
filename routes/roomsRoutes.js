@@ -3,15 +3,23 @@ import {
   createRoom,
   getRooms,
   getRoomsByHotel,
-  roomDetails
+  roomDetails,
+  updateRoomAvailability
 } from "../controllers/roomsController.js";
+import { verifyAdmin, verifyUser } from "../middleware/VerifyToken.js";
 
 const router = express.Router();
 
-router.post("/createRoom", createRoom);
-router.post("/allRooms", getRooms);
+//POST
+router.post("/createRoom",verifyAdmin, createRoom);
+//GET
+router.post("/allRooms",verifyAdmin, getRooms);
+//GET
 router.post("/getRoomsByHotel", getRoomsByHotel);
+//GET
 router.post("/details", roomDetails);
+//PATCH
+router.patch("/availability",verifyUser, updateRoomAvailability);
 
 // router.patch("/:id", updateRoom);
 
