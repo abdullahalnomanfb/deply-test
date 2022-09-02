@@ -25,6 +25,10 @@ app.use('/api/auth',AuthRoutes);
 app.use("/api/users", UserRoutes);
 app.use("/api/booking", BookingRoutes);
 
+app.get('/',(req,res)=>{
+  res.send("This is new Booking Server")
+})
+
 
 // Error Handler 
 app.all('*',(req,res,next)=>{
